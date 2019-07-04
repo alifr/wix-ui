@@ -156,10 +156,10 @@ describe('Pagination', () => {
     });
   });
 
-  describe('Plane mode', () => {
+  describe('Flat mode', () => {
     it('shows the total amount of pages', async () => {
       const p = await render(
-        <Pagination paginationMode="plane" totalPages={5} />,
+        <Pagination paginationMode="flat" totalPages={5} />,
       );
 
       expect(p.totalPagesLabel.textContent).toEqual('5');
@@ -167,7 +167,7 @@ describe('Pagination', () => {
 
     it('shows the current page label', async () => {
       const p = await render(
-        <Pagination paginationMode="plane" currentPage={2} totalPages={5} />,
+        <Pagination paginationMode="flat" currentPage={2} totalPages={5} />,
       );
 
       expect(p.currentPage.textContent).toBe('2');

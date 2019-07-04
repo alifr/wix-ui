@@ -20,7 +20,7 @@ const enum ButtonType {
 
 export const enum PaginationMode {
   Pages = 'pages',
-  Plane = 'plane',
+  Flat = 'flat',
   Input = 'input',
 }
 
@@ -35,7 +35,7 @@ export interface PaginationProps {
   onDoubleClick?(event: React.SyntheticEvent): void;
   onMouseEnter?(event: React.SyntheticEvent): void;
   onMouseLeave?(event: React.SyntheticEvent): void;
-  paginationMode?: 'pages' | 'input' | 'plane' | PaginationMode;
+  paginationMode?: 'pages' | 'input' | 'flat' | PaginationMode;
   showFirstLastNavButtons?: boolean;
   firstLabel?: React.ReactNode;
   previousLabel?: React.ReactNode;
@@ -195,41 +195,32 @@ export class Pagination extends React.Component<
     }
   };
 
-  private renderPages() {
+  private renderPages(): JSX.Element {
     switch (this.props.paginationMode) {
-      case 'input':
+      case PaginationMode.Input:
         return this.renderPageForm();
-      case 'plane':
+      case PaginationMode.Flat:
         return this.renderPagePlane();
-      case 'pages':
+      case PaginationMode.Pages:
       default:
         return this.renderPageStrip();
     }
   }
 
-  private renderPagePlane() {
+  private renderPagePlane(): JSX.Element {
     return (
       <div
         data-hook="page-plane"
         id={this.getId('pagePlane')}
         className={pStyle.plane}
-        dir="ltr"
       >
-        <span
-          key="current-page"
-          id={this.getId('currentPage')}
-          data-hook="current-page"
-        >
+        <span id={this.getId('currentPage')} data-hook="current-page">
           {this.props.currentPage}
         </span>
-        <span key="slash" id={this.getId('slash')} className={pStyle.slash}>
+        <span id={this.getId('slash')} className={pStyle.slash}>
           {this.props.slashLabel}
         </span>
-        <span
-          key="total-pages"
-          id={this.getId('totalPages')}
-          data-hook="total-pages"
-        >
+        <span id={this.getId('totalPages')} data-hook="total-pages">
           {this.props.totalPages}
         </span>
       </div>
